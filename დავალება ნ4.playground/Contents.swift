@@ -2,14 +2,18 @@ import Foundation
 
 //MARK: - სავალდებულო ამოცანები
 
-// 1. while ციკლის გამოყენებით, 1-დან 50-მდე დაბეჭდეთ ყველა კენტი რიცხვის ნამრავლი.
+// 1. while ციკლის გამოყენებით, 1-დან 20-მდე დაბეჭდეთ ყველა კენტი რიცხვის ნამრავლი.
 
-var oddNumbers = 1
+var oddNum = 1
+var product = 1
 
-while oddNumbers <= 50 {
-    print(oddNumbers)
-    oddNumbers += 2
+while oddNum <= 19 {
+    product *= oddNum
+    print(product)
+    oddNum += 2
 }
+
+print("The product of all odd numbers from 1 to 20 is \(product)")
 
 // 2. შექმენით String ტიპის ცვლადი და ციკლის გამოყენებით შემოაბრუნეთ ის, მაგ: თუ გვაქვს “Test” უნდა მივიღოთ “tseT”
 
