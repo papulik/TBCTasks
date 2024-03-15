@@ -60,9 +60,9 @@ print("საწყისი რაოდენობაა: \(tickets) ბი�
 while tickets <= 5 && tickets > 0 {
     tickets -= 1
     if tickets > 0 {
-        print("ბილეთი გაყიდულია, დარჩენილია მხოლოდ \(tickets) რაოდენობა") // This will print as long as tickets is more than 0
+        print("ბილეთი გაყიდულია, დარჩენილია მხოლოდ \(tickets) რაოდენობა")
     } else {
-        print("მეგობრებო ყველა ბილეთი გაყიდულია, გელოდებით კონცერტზე ! 🪩🕺") // This will print when tickets becomes 0
+        print("მეგობრებო ყველა ბილეთი გაყიდულია, გელოდებით კონცერტზე ! 🪩🕺")
     }
 }
 
@@ -97,14 +97,14 @@ for element in array {
 if allElementsAreUnique {
     print("array-ში ყველა ელემენტი განსხვავებულია")
 } else {
-    print("array შეიცავს მსგავს ელემენტებს")
+    print("array შეიცავს იდენტურ ელემენტებს")
 }
 
 // 6. დაწერეთ ქლოჟერი რომელიც გამოითვლის ორი რიცხვის სხვაობას და დააბრუნებს მიღებულ მნიშვნელობას
 
 let someClosure: (Int, Int) -> Int = { (num1, num2) -> Int in
     
-    return num1 - num2
+    num1 - num2
 }
 
 someClosure(5, 2)
@@ -132,8 +132,9 @@ func countSpecialCharacters(str: String) -> (Int, [Character]) {
     return (count, countedCharacters)
 }
 
-let inputString = "გამარჯობა" // გთხოვთ ჩაწეროთ მხოლოდ ქართული სიტყვები, ინგლისურზე ხმოვნების მასივი არ შემიქმნია 😬.
+let inputString = "გამარჯობა" // გთხოვთ ჩაწეროთ მხოლოდ ქართული სიტყვები, ლათინურზე ხმოვნების მასივი არ შემიქმნია 😬.
 let (specialCharacterCounts, countedCharacters) = countSpecialCharacters(str: inputString)
+
 print("ამ სიტყვაში არის: \(specialCharacterCounts) თანხმოვანი.")
 print("თანხმოვნები, რომლებიც ამ სიტყვაშია გამოკვეთილი: \(countedCharacters)")
 
