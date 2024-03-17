@@ -19,7 +19,7 @@ print(isPalindrome(text: palindromeText))
 
 // 2. დაწერეთ ფუნქცია რომელიც გადაცემულ რიცხვების array-ს ააკვარდატებს, დაპრინტავს და დააბრუნებს მნიშვნელობას.
 
-func squiaring(array: [Int]) -> [Int] {
+func squearing(array: [Int]) -> [Int] {
     
     var squaredNumber = array.map { element in
         element * element
@@ -28,7 +28,7 @@ func squiaring(array: [Int]) -> [Int] {
     return squaredNumber
 }
 
-let printArray = squiaring(array: [2,4,6])
+let printArray = squearing(array: [2,4,6])
 
 print(printArray)
 
@@ -67,11 +67,13 @@ printArraySumAfterDelay(array: [1, 2, 3, 4, 5]) {
 var contactsList: [String: Int] = [:]
 
 func addNumber(name: String, number: Int) {
-    if number > 100000000 && number < 1000000000 {
+    let numberString = String(number) //numberString ვიყენებ იმისათვის, რომ ნომრები იყოს 9 ნიშნა. ეს ამოცანის მოთხოვნა არაა.
+    
+    if numberString.count == 9 {
         contactsList[name] = number
-        print("\(name), წარმატებით დაემატა ✅.")
+        print("\(name) წარმატებით დაემატა ✅.")
     } else {
-        print("ნომერი უნდა იყოს 9 ნიშნა, გთხოვთ შეიყვანოთ ის 🧐.")
+        print("ნომერი უნდა შედგებოდეს 9 ნიშნისგან, გთხოვთ შეიყვანოთ 9 ნიშნა ნომერი 🧐.")
     }
 }
 
@@ -105,7 +107,7 @@ func sortedKeys(from dictionary: [String: Int]) -> [String] {
     return sortedKeys
 }
 
-let contacts: [String: Int] = ["ზუკა:": 239048, "ანი": 5551234, "ლადო": 5555678, "ალეკო": 5550000] //ქართულადაც გამოდის O_O.
+let contacts: [String: Int] = ["ზუკა:": 239048, "ანი": 5551234, "ლადო": 5555678, "ალეკო": 5550000]
 let sortedContactKeys = sortedKeys(from: contacts)
 print(sortedContactKeys)
 
