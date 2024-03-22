@@ -33,7 +33,7 @@ enum GialaSquad {
     case MoshishvlebuliMkerdi
     case TuGapatio
     
-    var pricesForGialaModes: Int { // ამის დახმარებითაც შეგვიძლია დავბეჭდოთ ფასი და ფუნქციიდანაც.
+    var pricesForGialaModes: Int {
         switch self {
         case .TsigroviManto:
             return 400
@@ -63,26 +63,26 @@ member.prices()
 // 3. შექმენით enum-ი Weather შემდეგი ქეისებით, Sunny, Cloudy, Rainy და Snowy. ამ ქეისებს უნდა ჰქონდეს associated value Celsius-ის სახით. დაწერეთ function რომელიც მიიღებს ამ enum-ს, და მოგვცემს რეკომენდაციას რა უნდა ჩავიცვათ შესაბამისი ამინდის მიხედვით.
 
 enum Weather {
-    case sunny(Double)
-    case Cloudy(Double)
-    case Rainy(Double)
-    case Snowy(Double)
+    case sunny(celsius: Double)
+    case Cloudy(celsius: Double)
+    case Rainy(celsius: Double)
+    case Snowy(celsius: Double)
 }
 
 func weatherChecker(weather: Weather) {
     switch weather {
-    case .sunny(let temperature):
-        print("დღეს ამინდის მიხედვით გვაქვს: \(temperature) გრადუსი, მზიანი ამინდი გვთავაზობს ჩავიცვათ მოკლემკლავიანი.")
-    case .Cloudy(let temperature):
-        print("დღეს ამინდის მიხედვით გვაქვს: \(temperature) გრადუსი, მოღრუბლული ამინდი გვთავაზობს რამე ჟაკეტი.")
-    case .Rainy(let temperature):
-        print("დღეს ამინდის მიხედვით გვაქვს: \(temperature) გრადუსი, წვიმიანი ამინდი გვთავაზობს ჩავიცვათ საწვიმარი")
-    case .Snowy(let temperature):
-        print("დღეს ამინდის მიხედვით გვაქვს: \(temperature) გრადუსი, თოვლიანი ამინდი გვთავაზობს ჩავიცვათ დუტის კურტკა!")
+    case .sunny(let temp):
+        print("დღეს ამინდის მიხედვით გვაქვს: \(temp) გრადუსი, მზიანი ამინდი გვთავაზობს ჩავიცვათ მოკლემკლავიანი.")
+    case .Cloudy(let temp):
+        print("დღეს ამინდის მიხედვით გვაქვს: \(temp) გრადუსი, მოღრუბლული ამინდი გვთავაზობს რამე ჟაკეტი.")
+    case .Rainy(let temp):
+        print("დღეს ამინდის მიხედვით გვაქვს: \(temp) გრადუსი, წვიმიანი ამინდი გვთავაზობს ჩავიცვათ საწვიმარი")
+    case .Snowy(let temp):
+        print("დღეს ამინდის მიხედვით გვაქვს: \(temp) გრადუსი, თოვლიანი ამინდი გვთავაზობს ჩავიცვათ დუტის კურტკა!")
     }
 }
 
-let currentWeather = Weather.Snowy(18.5)
+let currentWeather = Weather.Snowy(celsius: 18.5)
 weatherChecker(weather: currentWeather)
 
 // 4. შექმენით struct-ი Kanye, ფროფერთებით: album, releaseYear. ამის შემდეგ შექმენით array-ი Kanye-ს ტიპის, ჩაამატეთ რამოდენიმე Kanye-ს ობიექტი, და შეავსეთ მასივი კანიეებით. დაწერეთ ფუნქცია, რომელიც მიიღებს ამ კანიეების მასივს და წელს. ფუნქციამ უნდა დაგვიბრუნოს ყველა ალბომი რომელიც გამოშვებულია გადაწოდებული წლის შემდეგ და დაბეჭდოს ისინი.
