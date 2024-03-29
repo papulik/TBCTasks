@@ -72,8 +72,7 @@ class Paladin: MagicUser, CastMagic {
     
     override func prepareSpecialAction() {
         // Strong reference self - ზე
-        performSpecialAction = { [weak self] in
-            guard let self = self else { return }
+        performSpecialAction = { [unowned self] in // 4. აუცილებელია გამოიყენოთ strong, weak & unowned რეფერენსები ერთხელ მაინც
             print("\(self.name) the Paladin shines with \(self.spellType) light!") // 5. დაიჭირეთ self ქლოჟერებში
         }
     }
