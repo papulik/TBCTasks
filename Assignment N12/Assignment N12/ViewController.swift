@@ -72,8 +72,8 @@ class ViewController: UIViewController {
         
         // Reset text fields' background color after a delay
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) { [weak self] in
-            self?.topTextField.backgroundColor = .white
-            self?.bottomTextField.backgroundColor = .white
+            self?.topTextField.backgroundColor = .darkAndLightColors //custom darkModeLightMode color ღილაკისთვის.
+            self?.bottomTextField.backgroundColor = .darkAndLightColors //custom darkModeLightMode color ღილაკისთვის.
         }
     }
     
