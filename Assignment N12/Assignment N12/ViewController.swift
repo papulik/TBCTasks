@@ -25,7 +25,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func statusChanger(_ sender: UISwitch) {
-        if sender.isOn == true {
+        if sender.isOn {
             statusLabel.text = "უდიდესი საერთო გამყოფი"
             button.backgroundColor = .systemOrange
         } else {
