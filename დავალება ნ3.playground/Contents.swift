@@ -120,3 +120,17 @@ if num2 < 0 {
 let result = distance1 == distance2 ? "თანაბრად დაშორებულია ნულიდან" : "არ არის თანაბრად დაშორებული ნულიდან"
 
 print(result)
+
+
+func performDelayedAction(with closure: @escaping () -> Void) {
+    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+        closure()
+    }
+    
+    print("🟢")
+}
+
+// Usage:
+performDelayedAction {
+    print("This message is delayed by 2 seconds.")
+}

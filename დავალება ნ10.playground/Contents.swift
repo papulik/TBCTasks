@@ -120,7 +120,7 @@ struct MemoryManagementExample { // 3. აუცილებელია value �
         companion.master = paladin // 1. შექმენით ციკლური რეფერენცები და გაწყვიტეთ
         
         //Arthur:
-        paladin.prepareSpecialAction()
+        paladin.prepareSpell()
         paladin.castSpell()
         paladin.performSpecialAction()
         //Morgana:

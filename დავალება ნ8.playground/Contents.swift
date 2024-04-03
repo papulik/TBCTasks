@@ -241,3 +241,28 @@ generator.addExpression(newExpression: "ცხოვრება წიგნი
 generator.removeExpression(expressionToRemove: "მზე აღარ ამოდის ჩაგვიჭრეს")
 
 generator.showRandomExpression()
+
+
+//protocol Asdf {
+//    func zdarova()
+//}
+//
+//struct Baro: Asdf {
+//    var name = "zuka"
+//    func zdarova() {
+//        print("zdarova")
+//    }
+//}
+//
+//class Privet: Asdf {
+//    var age = 1
+//    func zdarova() {
+//        print("privet")
+//    }
+//}
+//
+//var delegate: Asdf
+
+
+
+
