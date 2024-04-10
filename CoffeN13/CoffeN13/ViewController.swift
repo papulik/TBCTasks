@@ -128,21 +128,21 @@ class ViewController: UIViewController {
     
     //MARK: - UI Configuration
     
+    func configButtons(button: UIButton) {
+        button.layer.borderWidth = 2.0
+        button.layer.cornerRadius = 10
+        button.layer.borderColor = UIColor.lightGray.cgColor
+    }
+    
     func configureUI() {
         imageView.layer.cornerRadius = 9
         imageView.clipsToBounds = true
         //პაწა ღილაკი
-        buttonSmall.layer.borderWidth = 2.0
-        buttonSmall.layer.cornerRadius = 10
-        buttonSmall.layer.borderColor = UIColor.lightGray.cgColor
+        configButtons(button: buttonSmall)
         //საშუალო ღილაკი
-        buttonMedium.layer.borderWidth = 2.0
-        buttonMedium.layer.cornerRadius = 10
-        buttonMedium.layer.borderColor = UIColor.lightGray.cgColor
+        configButtons(button: buttonMedium)
         //დიდი ღილაკი
-        buttonBig.layer.borderWidth = 2.0
-        buttonBig.layer.cornerRadius = 10
-        buttonBig.layer.borderColor = UIColor.lightGray.cgColor
+        configButtons(button: buttonBig)
         //ყიდვის ღილაკი
         purchase.layer.cornerRadius = 10
         //White View
