@@ -56,7 +56,7 @@ class MainView: UIView {
         let placeholderText = "მაგ: ვერძი"
         let placeholderAttributes: [NSAttributedString.Key: Any] = [
             .foregroundColor: UIColor.gray,
-            .font: UIFont.systemFont(ofSize: 16) // Adjust the size as needed
+            .font: UIFont.systemFont(ofSize: 16)
         ]
         textField.attributedPlaceholder = NSAttributedString(string: placeholderText, attributes: placeholderAttributes)
         textField.borderStyle = .roundedRect

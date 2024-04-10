@@ -71,8 +71,7 @@ class ViewController: UIViewController, RecieveColorDelegate {
     @objc func action() {
         guard let signName = self.mainPageView.textField.text, !signName.isEmpty,
               let zodiacSign = self.zodiacSign(forName: signName) else {
-            // Handle the case where the text is empty or no zodiac sign is found
-            let alertVC = UIAlertController(title: "Unknown Name ‼️", message: "გთხოვთ ჩაწეროთ ზოდიაქოები ქართულად, მადლობა წინასწარ 😌", preferredStyle: .alert)
+            let alertVC = UIAlertController(title: "Unknown Name ‼️", message: "გთხოვთ ჩაწეროთ ზოდიაქოები ქართულად, მაგალითად (ვერძი), (კურო) და ასე შემდეგ. მადლობა წინასწარ 😌", preferredStyle: .alert)
             let action = UIAlertAction(title: "Ok", style: .cancel)
             alertVC.addAction(action)
             present(alertVC, animated: true)
@@ -82,7 +81,7 @@ class ViewController: UIViewController, RecieveColorDelegate {
         }
         
         let descriptionVC = DescriptionVC()
-        descriptionVC.zodiacSign = zodiacSign // Ensure DescriptionVC has a `zodiacSign` property
+        descriptionVC.zodiacSign = zodiacSign
         self.navigationController?.pushViewController(descriptionVC, animated: true)
         
         descriptionVC.delegate = self

@@ -64,7 +64,7 @@ class DescriptionVC: UIViewController, SomeColorDelegate {
     
     @objc func action() {
         let oppositeSignVC = OppositeSignVC()
-        oppositeSignVC.zodiacSign = self.zodiacSign  // Pass the zodiacSign data to the OppositeSignVC
+        oppositeSignVC.zodiacSign = self.zodiacSign
         self.navigationController?.pushViewController(oppositeSignVC, animated: true)
         oppositeSignVC.delegate = self
     }

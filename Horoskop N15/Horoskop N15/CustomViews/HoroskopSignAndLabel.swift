@@ -47,7 +47,7 @@ class HoroskopSignAndLabel: UIView {
     
     private func setupStackView() {
         stackView.axis = .vertical
-        stackView.spacing = 30 // Default spacing
+        stackView.spacing = 30 
         
         stackView.addArrangedSubview(imageView)
         stackView.addArrangedSubview(nameLabel)
@@ -59,8 +59,8 @@ class HoroskopSignAndLabel: UIView {
         stackView.addArrangedSubview(spacer)
         
         // Low priority simagleze
-        let spacerHeightConstraint = spacer.heightAnchor.constraint(equalToConstant: 100) // Default spacer height
-        spacerHeightConstraint.priority = UILayoutPriority(rawValue: 250) // Lower than default priority
+        let spacerHeightConstraint = spacer.heightAnchor.constraint(equalToConstant: 100)
+        spacerHeightConstraint.priority = UILayoutPriority(rawValue: 250) 
         spacerHeightConstraint.isActive = true
         
         stackView.addArrangedSubview(button)
