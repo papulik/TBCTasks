@@ -55,7 +55,7 @@ class LastPageView: UIView {
     }
     
     func configure(with zodiacSign: ZodiacSign) {
-        imageView.image = UIImage(named: zodiacSign.imageName)
-        nameLabel.text = zodiacSign.name
+        imageView.image = UIImage(named: zodiacSign.oppositeImageName)
+        nameLabel.text = zodiacSign.oppositeName
     }
 }

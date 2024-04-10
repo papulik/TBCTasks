@@ -11,4 +11,6 @@ struct ZodiacSign {
     let name: String
     let imageName: String
     let body: String
+    let oppositeImageName: String
+    let oppositeName: String
 }
