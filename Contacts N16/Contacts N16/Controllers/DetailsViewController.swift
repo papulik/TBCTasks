@@ -89,7 +89,7 @@ class DetailsViewController: UIViewController {
         tableView.register(DetailsTableViewCell.self, forCellReuseIdentifier: "DetailsTableViewCell")
         tableView.reloadData()
     }
-
+    
 }
 
 extension DetailsViewController: UITableViewDelegate, UITableViewDataSource {

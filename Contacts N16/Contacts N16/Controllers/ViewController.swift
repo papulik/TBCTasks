@@ -70,6 +70,8 @@ class ViewController: UIViewController {
     
 }
 
+//MARK: - Delegate Methods
+
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return sectionKeys.count + 1
@@ -131,10 +133,17 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             indicatorImageView.tintColor = .lightGray
             indicatorImageView.frame = CGRect(x: tableView.frame.width - 40, y: 43, width: 15, height: 15)
             headerView.addSubview(indicatorImageView)
-            //Invisible Button:
+            // Invisible Button:
             let invisibleButton = UIButton(type: .custom)
             invisibleButton.frame = headerView.bounds
-            invisibleButton.addTarget(self, action: #selector(headerButtonTapped), for: .touchUpInside)
+            //MARK: - Header Action:
+            let action = UIAction { [weak self] _ in
+                guard let self = self else { return }
+                let vc = DetailsViewController()
+                vc.desctiptionArray.append(DetailsModel(name: "Zuka Papuashvili", imageName: "Avatar Image-5", gender: .male, age: 31, hobby: "Boxing"))
+                self.navigationController?.pushViewController(vc, animated: false)
+            }
+            invisibleButton.addAction(action, for: .touchUpInside)
             headerView.addSubview(invisibleButton)
             
             return headerView
@@ -150,14 +159,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             
             return headerView
         }
-        
-    }
-    //MARK: - Action For Header:
-    
-    @objc func headerButtonTapped() {
-        let vc = DetailsViewController()
-        vc.desctiptionArray.append(DetailsModel(name: "Zuka Papuashvili", imageName: "Avatar Image-5", gender: .male, age: 31, hobby: "Boxing"))
-        navigationController?.pushViewController(vc, animated: false)
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
