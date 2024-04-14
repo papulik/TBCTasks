@@ -112,7 +112,6 @@
 				60270A122BCB49CA0032D9E3 /* Extensions */,
 				60270A132BCC37BA0032D9E3 /* Resources */,
 				60270A142BCC37F00032D9E3 /* Supporting Files */,
-				6027099A2BCA9FCE0032D9E3 /* Info.plist */,
 			);
 			path = "ComplainHub N17";
 			sourceTree = "<group>";
@@ -211,6 +210,7 @@
 		60270A142BCC37F00032D9E3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6027099A2BCA9FCE0032D9E3 /* Info.plist */,
 				602709972BCA9FCE0032D9E3 /* LaunchScreen.storyboard */,
 			);
 			path = "Supporting Files";
@@ -458,7 +458,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2XP9JWLHYD;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "ComplainHub N17/Info.plist";
+				INFOPLIST_FILE = "ComplainHub N17/Supporting Files/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -486,7 +486,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2XP9JWLHYD;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "ComplainHub N17/Info.plist";
+				INFOPLIST_FILE = "ComplainHub N17/Supporting Files/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
