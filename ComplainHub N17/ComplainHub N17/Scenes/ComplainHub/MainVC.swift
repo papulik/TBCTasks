@@ -48,6 +48,7 @@ class MainVC: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
+    //MARK: - SetupUI Main
     func setupUI() {
         //button:
         button.setTitle("ახალი ბარათის დამატება", for: .normal)
@@ -74,6 +75,7 @@ class MainVC: UIViewController {
         backgroundImage.translatesAutoresizingMaskIntoConstraints = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         button.translatesAutoresizingMaskIntoConstraints = false
+        
         //MARK: - Constraints
         NSLayoutConstraint.activate([
             //image:

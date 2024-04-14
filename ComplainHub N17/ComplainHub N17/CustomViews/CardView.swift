@@ -9,6 +9,7 @@ import UIKit
 
 class CardView: UIView {
     
+    //MARK: - CardView UI Properties
     //main outter vertical stack:
     let verticalStack = UIStackView()
     //outter stack elements:
@@ -18,10 +19,10 @@ class CardView: UIView {
     let detailTextField = UITextField()
     let chooseLabel = UILabel()
     //images: for inner stack
-    let image1 = UIImageView()
-    let image2 = UIImageView()
-    let image3 = UIImageView()
-    let image4 = UIImageView()
+    let imageButton1 = UIButton()
+    let imageButton2 = UIButton()
+    let imageButton3 = UIButton()
+    let imageButton4 = UIButton()
     //inner horizontal stack:
     let horizontalStack = UIStackView()
     //spacer views for vertical stack:
@@ -30,13 +31,13 @@ class CardView: UIView {
     //spacer views for horiontal stack:
     let leadingSpacer = UIView()
     let trailingSpacer = UIView()
-    //closure too inform vc:
+    //imageName:
     var selectedImageName: String?
     
+    //MARK: - INIT:
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
-        setupGestureRecognizers()
     }
     
     required init?(coder: NSCoder) {
@@ -44,8 +45,24 @@ class CardView: UIView {
     }
     
     func setupView() {
-        
-        //MARK: - Setup Title
+        //title:
+        setupTitleAndTitleTextField()
+        //details:
+        setupDetailsAndDetailsTextField()
+        //choose:
+        setupChooseLabel()
+        //Buttons:
+        setupButtons()
+        //Horizontal Stack:
+        setupHorizontalStack()
+        //Vertical Stack:
+        setupVerticalStack()
+        //constraints:
+        configureMainStack()
+    }
+    
+    //MARK: - Setup Title
+    func setupTitleAndTitleTextField() {
         titleLabel.text = "სათაური"
         titleLabel.font = UIFont(name: Constants.font, size: 16)
         titleLabel.textColor = .white
@@ -61,8 +78,10 @@ class CardView: UIView {
             string: "Placeholder Text",
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray]
         )
-        
-        //MARK: - Setup Details
+    }
+    
+    //MARK: - Setup Details
+    private func setupDetailsAndDetailsTextField() {
         detailsLabel.text = "აღწერა"
         detailsLabel.font = UIFont(name: Constants.font, size: 16)
         detailsLabel.textColor = .white
@@ -78,45 +97,84 @@ class CardView: UIView {
             string: "Placeholder Text",
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray]
         )
-        
-        //MARK: - Setup Choose Label and Icons
+    }
+    
+    //MARK: - Setup Choose Label and Icons
+    private func setupChooseLabel() {
         chooseLabel.text = "აარჩიეთ აიქონი"
         chooseLabel.font = UIFont(name: Constants.font, size: 16)
         chooseLabel.textColor = .white
-        //images:
-        image1.image = UIImage(named: Constants.imageOneName)
-        image2.image = UIImage(named: Constants.imageTwoName)
-        image3.image = UIImage(named: Constants.imageThreeName)
-        image4.image = UIImage(named: Constants.imageFourName)
-        image1.contentMode = .scaleAspectFit
-        image2.contentMode = .scaleAspectFit
-        image3.contentMode = .scaleAspectFit
-        image4.contentMode = .scaleAspectFit
-        
-        //MARK: - Setup Horizontal & Vertical Stacks
-        setupHorizontalStack()
-        //Vertical Stack:
-        setupVerticalStack()
-        //constraints:
-        configureMainStack()
     }
     
+    //MARK: - Setup Icon Buttons:
+    func setupButtons() {
+        configureButton(imageButton1, withImageNamed: Constants.imageOneName)
+        configureButton(imageButton2, withImageNamed: Constants.imageTwoName)
+        configureButton(imageButton3, withImageNamed: Constants.imageThreeName)
+        configureButton(imageButton4, withImageNamed: Constants.imageFourName)
+    }
+    
+    //MARK: - Configure Icon Buttons:
+    func configureButton(_ button: UIButton, withImageNamed imageName: String) {
+        if let image = UIImage(named: imageName) {
+            button.setImage(image, for: .normal)
+        }
+        button.imageView?.contentMode = .scaleAspectFit
+        button.layer.cornerRadius = 12
+        button.clipsToBounds = true
+        button.addAction(UIAction { [weak self] action in
+            self?.buttonTapped(button)
+        }, for: .touchUpInside)
+    }
+    
+    //MARK: - Icon Choose ButtonAction
+    func buttonTapped(_ button: UIButton) {
+        highlightButton(button)
+        switch button {
+        case imageButton1:
+            selectedImageName = Constants.imageOneName
+        case imageButton2:
+            selectedImageName = Constants.imageTwoName
+        case imageButton3:
+            selectedImageName = Constants.imageThreeName
+        case imageButton4:
+            selectedImageName = Constants.imageFourName
+        default:
+            break
+        }
+    }
+    
+    //MARK: - Button Custom Animation:
+    func highlightButton(_ button: UIButton) {
+        // Reset all buttons
+        [imageButton1, imageButton2, imageButton3, imageButton4].forEach { btn in
+            btn.layer.borderWidth = 0
+            btn.alpha = 0.6
+        }
+        
+        // Highlight selected button
+        button.layer.borderWidth = 4
+        button.layer.borderColor = UIColor.green.cgColor
+        button.alpha = 1.0
+    }
+    
+    //MARK: - Setup Main Horizontal Stack:
     func setupHorizontalStack() {
         //subs:
         horizontalStack.addArrangedSubview(leadingSpacer)
-        horizontalStack.addArrangedSubview(image1)
-        horizontalStack.addArrangedSubview(image2)
-        horizontalStack.addArrangedSubview(image3)
-        horizontalStack.addArrangedSubview(image4)
+        horizontalStack.addArrangedSubview(imageButton1)
+        horizontalStack.addArrangedSubview(imageButton2)
+        horizontalStack.addArrangedSubview(imageButton3)
+        horizontalStack.addArrangedSubview(imageButton4)
         horizontalStack.addArrangedSubview(trailingSpacer)
         //stack:
         horizontalStack.axis = .horizontal
         horizontalStack.distribution = .equalSpacing
         horizontalStack.alignment = .center
         horizontalStack.spacing = 25
-        
     }
     
+    //MARK: - Setup Vertical Icon Stack:
     func setupVerticalStack() {
         //stack subs:
         verticalStack.addArrangedSubview(titleLabel)
@@ -157,53 +215,11 @@ class CardView: UIView {
         ])
         
         let imageHeight = 40.0
-        [image1, image2, image3, image4].forEach { imageView in
+        [imageButton1, imageButton2, imageButton3, imageButton4].forEach { imageView in
             NSLayoutConstraint.activate([
                 imageView.heightAnchor.constraint(equalToConstant: imageHeight),
                 imageView.widthAnchor.constraint(equalToConstant: imageHeight)
             ])
         }
     }
-    
-    //MARK: - Icon Gesture Highlighters:
-    func setupGestureRecognizers() {
-        [image1, image2, image3, image4].forEach { imageView in
-            imageView.isUserInteractionEnabled = true // Enable user interaction
-            imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleImageTap(_:))))
-        }
-    }
-    
-    //MARK: - Selected Icon Image Names
-    @objc func handleImageTap(_ gesture: UITapGestureRecognizer) {
-        if let selectedImageView = gesture.view as? UIImageView {
-            highlightImageView(selectedImageView)
-            switch selectedImageView {
-            case image1:
-                selectedImageName = Constants.imageOneName
-            case image2:
-                selectedImageName = Constants.imageTwoName
-            case image3:
-                selectedImageName = Constants.imageThreeName
-            case image4:
-                selectedImageName = Constants.imageFourName
-            default:
-                break
-            }
-        }
-    }
-    
-    func highlightImageView(_ imageView: UIImageView) {
-        // Reset all images
-        [image1, image2, image3, image4].forEach { img in
-            img.layer.borderWidth = 0
-            img.alpha = 0.6
-        }
-        
-        // Highlight selected image
-        imageView.layer.cornerRadius = 12
-        imageView.layer.borderWidth = 4
-        imageView.layer.borderColor = UIColor.green.cgColor
-        imageView.alpha = 1.0
-    }
-    
 }

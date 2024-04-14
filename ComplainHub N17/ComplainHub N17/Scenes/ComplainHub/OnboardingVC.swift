@@ -27,6 +27,7 @@ class OnboardingVC: UIViewController {
         navigationController?.pushViewController(mainVC, animated: true)
     }
     
+    //MARK: - Setup UI OnBoarding
     func setupUI() {
         //image:
         backgroundImage.image = UIImage(named: "Group 4")
@@ -55,6 +56,7 @@ class OnboardingVC: UIViewController {
         backgroundImage.translatesAutoresizingMaskIntoConstraints = false
         someText.translatesAutoresizingMaskIntoConstraints = false
         button.translatesAutoresizingMaskIntoConstraints = false
+        
         //MARK: - Constraints
         NSLayoutConstraint.activate([
             //background:

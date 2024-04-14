@@ -29,9 +29,10 @@ class NewCardVC: UIViewController {
               let topText = card.titleTextField.text,
               let detailText = card.detailTextField.text else {
             //Handle the error:
-            let alertVC = UIAlertController(title: "Found Nil", message: "გთხოვთ შეავსოთ ყველა საჭირო ბმული, მადლობა :)", preferredStyle: .alert)
+            let alertVC = UIAlertController(title: "Found Nil", message: "გთხოვთ შეავსოთ ერთი ბმული მაინც, მადლობა 🧐.", preferredStyle: .alert)
             let alertAction = UIAlertAction(title: "Ok", style: .cancel)
             alertVC.addAction(alertAction)
+            present(alertVC, animated: true)
             return
         }
         
