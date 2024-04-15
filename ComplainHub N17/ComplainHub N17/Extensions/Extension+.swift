@@ -26,6 +26,20 @@ extension MainVC: UICollectionViewDelegate, UICollectionViewDataSource {
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        someData.remove(at: indexPath.row)
+        collectionView.performBatchUpdates({
+            collectionView.deleteItems(at: [indexPath])
+        }) { [weak self] finished in
+            if finished {
+                let alertVC = UIAlertController(title: "Successfully Deleted", message: "გილოცავთ, ბარათი წარმათებით წაიშალა ✅", preferredStyle: .alert)
+                let action = UIAlertAction(title: "Ok", style: .cancel)
+                alertVC.addAction(action)
+                self?.present(alertVC, animated: true)
+            }
+        }
+    }
+    
 }
 
 //MARK: - DataModel Delegate:

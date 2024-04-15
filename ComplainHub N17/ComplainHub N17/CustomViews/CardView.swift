@@ -44,7 +44,7 @@ class CardView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupView() {
+    private func setupView() {
         //title:
         setupTitleAndTitleTextField()
         //details:
@@ -62,7 +62,7 @@ class CardView: UIView {
     }
     
     //MARK: - Setup Title
-    func setupTitleAndTitleTextField() {
+    private func setupTitleAndTitleTextField() {
         titleLabel.text = "სათაური"
         titleLabel.font = UIFont(name: Constants.font, size: 16)
         titleLabel.textColor = .white
@@ -107,7 +107,7 @@ class CardView: UIView {
     }
     
     //MARK: - Setup Icon Buttons:
-    func setupButtons() {
+    private func setupButtons() {
         configureButton(imageButton1, withImageNamed: Constants.imageOneName)
         configureButton(imageButton2, withImageNamed: Constants.imageTwoName)
         configureButton(imageButton3, withImageNamed: Constants.imageThreeName)
@@ -115,7 +115,7 @@ class CardView: UIView {
     }
     
     //MARK: - Configure Icon Buttons:
-    func configureButton(_ button: UIButton, withImageNamed imageName: String) {
+    private func configureButton(_ button: UIButton, withImageNamed imageName: String) {
         if let image = UIImage(named: imageName) {
             button.setImage(image, for: .normal)
         }
@@ -128,7 +128,7 @@ class CardView: UIView {
     }
     
     //MARK: - Icon Choose ButtonAction
-    func buttonTapped(_ button: UIButton) {
+    private func buttonTapped(_ button: UIButton) {
         highlightButton(button)
         switch button {
         case imageButton1:
@@ -145,7 +145,7 @@ class CardView: UIView {
     }
     
     //MARK: - Button Custom Animation:
-    func highlightButton(_ button: UIButton) {
+    private func highlightButton(_ button: UIButton) {
         // Reset all buttons
         [imageButton1, imageButton2, imageButton3, imageButton4].forEach { btn in
             btn.layer.borderWidth = 0
@@ -159,7 +159,7 @@ class CardView: UIView {
     }
     
     //MARK: - Setup Main Horizontal Stack:
-    func setupHorizontalStack() {
+    private func setupHorizontalStack() {
         //subs:
         horizontalStack.addArrangedSubview(leadingSpacer)
         horizontalStack.addArrangedSubview(imageButton1)
@@ -175,7 +175,7 @@ class CardView: UIView {
     }
     
     //MARK: - Setup Vertical Icon Stack:
-    func setupVerticalStack() {
+    private func setupVerticalStack() {
         //stack subs:
         verticalStack.addArrangedSubview(titleLabel)
         verticalStack.addArrangedSubview(titleTextField)
@@ -192,7 +192,7 @@ class CardView: UIView {
         verticalStack.spacing = 15
     }
     
-    func configureMainStack() {
+    private func configureMainStack() {
         addSubview(verticalStack)
         verticalStack.translatesAutoresizingMaskIntoConstraints = false
         

@@ -18,7 +18,7 @@ class BackGroundImage: UIImageView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure() {
+    private func configure() {
         image = UIImage(named: "Rectangle 1")
         contentMode = .scaleAspectFill
         clipsToBounds = true
