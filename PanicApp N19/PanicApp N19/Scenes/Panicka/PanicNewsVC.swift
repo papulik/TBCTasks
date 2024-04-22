@@ -51,16 +51,14 @@ class PanicNewsVC: UIViewController {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let infoData):
-                    self?.news = infoData.list  // Assuming `list` is the array of news items
+                    self?.news = infoData.list
                     self?.tableView.reloadData()
                 case .failure(let error):
                     print("Error: \(error.localizedDescription)")
-                    // Handle error e.g., show an alert
                 }
             }
         }
     }
-    
 }
 
 //MARK: - TableView Delegates
