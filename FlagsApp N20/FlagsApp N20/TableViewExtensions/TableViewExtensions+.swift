@@ -11,7 +11,7 @@ import UIKit
 extension CountriesVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return countries.count
+        return viewModel.countries.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -20,7 +20,7 @@ extension CountriesVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CountriesCell
-        let country = countries[indexPath.section]
+        let country = viewModel.countries[indexPath.section]
         
         if let countryName = country.name?.common {
             cell.countryName.text = countryName
@@ -50,45 +50,12 @@ extension CountriesVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let country = countries[indexPath.section]
+        let country = viewModel.countries[indexPath.section]
+        let detailsViewModel = DetailsCountryViewModel(from: country)
         let detailsVC = DetailsCountryVC()
-        detailsVC.countryDetails.imageUrl = country.flags?.png
-        detailsVC.countryDetails.titleName = country.name?.common
-        detailsVC.countryDetails.aboutBody = country.flags?.alt
-        detailsVC.countryDetails.countryName = country.name?.common
-        detailsVC.countryDetails.spellingName = country.altSpellings?.last
-        detailsVC.countryDetails.capitalName = country.capital?.first
-        if let currencies = country.currencies, let firstCurrencyKey = currencies.keys.first {
-            if let currency = currencies[firstCurrencyKey] {
-                let currencySymbol = currency.symbol ?? ""
-                let currencyName = currency.name ?? ""
-                let currencyDisplay = "\(currencyName) - \(currencySymbol)"
-                detailsVC.countryDetails.currencyName = currencyDisplay
-            }
-        }
-        
-        detailsVC.countryDetails.regionName = country.region
-        if let borders = country.borders {
-            let bordersDisplay = borders.joined(separator: ", ")
-            detailsVC.countryDetails.neighborsName = bordersDisplay
-        }
-        detailsVC.countryDetails.googleURL = country.maps?.googleMaps
-        detailsVC.countryDetails.openStreetURL = country.maps?.openStreetMaps
+        detailsVC.viewModel = detailsViewModel
         
         navigationController?.pushViewController(detailsVC, animated: false)
     }
 }
 
-//MARK: - LoadImage Extension
-extension UIImageView {
-    func loadImage(from url: URL) {
-        URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
-            guard let data = data, let image = UIImage(data: data), error == nil else {
-                return
-            }
-            DispatchQueue.main.async {
-                self?.image = image
-            }
-        }.resume()
-    }
-}
