@@ -74,7 +74,7 @@ class CountriesVC: UIViewController {
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
-
+    
 }
 
 //MARK: - CountriesViewModel Delegate:
@@ -88,6 +88,13 @@ extension CountriesVC: CountriesViewModelDelegate {
         print(error)
     }
     
+    func selectRow(country: Country) {
+        let detailsViewModel = DetailsCountryViewModel(from: country)
+        let detailsVC = DetailsCountryVC()
+        detailsVC.viewModel = detailsViewModel
+
+        navigationController?.pushViewController(detailsVC, animated: false)
+    }
 }
 
 //MARK: - LoadImage Extension

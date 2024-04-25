@@ -13,6 +13,7 @@ protocol DetailsCountryViewModelDelegate: AnyObject {
 }
 
 class DetailsCountryViewModel {
+    
     weak var delegate: DetailsCountryViewModelDelegate?
     
     var imageUrl: String?

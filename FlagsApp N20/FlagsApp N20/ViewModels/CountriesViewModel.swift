@@ -9,6 +9,7 @@ import UIKit
 protocol CountriesViewModelDelegate: AnyObject {
     func didUpdateCountries()
     func didEncounterError(error: String)
+    func selectRow(country: Country)
 }
 
 protocol Searchable {
@@ -33,6 +34,10 @@ class CountriesViewModel {
                 }
             }
         }
+    }
+    
+    func selection(index: IndexPath) {
+        delegate?.selectRow(country: countries[index.row])
     }
 }
 

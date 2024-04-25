@@ -50,12 +50,7 @@ extension CountriesVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let country = viewModel.countries[indexPath.section]
-        let detailsViewModel = DetailsCountryViewModel(from: country)
-        let detailsVC = DetailsCountryVC()
-        detailsVC.viewModel = detailsViewModel
-        
-        navigationController?.pushViewController(detailsVC, animated: false)
+        viewModel.selection(index: indexPath)
     }
 }
 
