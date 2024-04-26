@@ -10,17 +10,26 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let scene = (scene as? UIWindowScene) else { return }
         
-        let vc = CountriesVC()
-        let navigationController = UINavigationController(rootViewController: vc)
         window = UIWindow(windowScene: scene)
-        window?.rootViewController = navigationController
+        if KeychainService.retrieve(forKey: "username") != nil,
+           KeychainService.retrieve(forKey: "password") != nil {
+            // Show CountriesVC if username and password are found
+            let countriesVC = CountriesVC()
+            let navigationController = UINavigationController(rootViewController: countriesVC)
+            window?.rootViewController = navigationController
+        } else {
+            // Show LoginVC if credentials are not found
+            let loginVC = LoginVC()
+            let navigationController = UINavigationController(rootViewController: loginVC)
+            window?.rootViewController = navigationController
+        }
         window?.makeKeyAndVisible()
         
     }
-
+    
 }
 

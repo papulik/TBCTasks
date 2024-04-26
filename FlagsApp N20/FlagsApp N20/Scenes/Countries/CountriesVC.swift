@@ -17,10 +17,10 @@ class CountriesVC: UIViewController {
     //MARK: - LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        //viewModel:
+        firstTimeLogin()
+        updateTrait()
         viewModel.delegate = self
         viewModel.fetchCountries()
-        
         setupUI()
         setupSearch()
     }
@@ -43,7 +43,37 @@ class CountriesVC: UIViewController {
         navigationItem.backBarButtonItem = backButton
     }
     
-    func setupSearch() {
+    private func firstTimeLogin() {
+        let isFirstLogin = UserDefaults.standard.bool(forKey: "isFirstLogin")
+        
+        if isFirstLogin {
+            showCongratulatoryAlert()
+            UserDefaults.standard.set(false, forKey: "isFirstLogin")
+        }
+    }
+    
+    private func showCongratulatoryAlert() {
+            let alert = UIAlertController(
+                title: "Congratulations 🎉",
+                message: "You have successfully logged in! ✅",
+                preferredStyle: .alert
+            )
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            
+            self.present(alert, animated: true)
+        }
+    
+    private func updateTrait() {
+        registerForTraitChanges([UITraitUserInterfaceStyle.self], handler: { (self: Self, previousTraitCollection: UITraitCollection) in
+            if self.traitCollection.userInterfaceStyle == .light {
+                self.tableView.reloadData()
+            } else {
+                self.tableView.reloadData()
+            }
+        })
+    }
+    
+    private func setupSearch() {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search Countries"
@@ -52,7 +82,7 @@ class CountriesVC: UIViewController {
     }
     
     //MARK: - UI Setup
-    func setupUI() {
+    private func setupUI() {
         view.backgroundColor = .darkMode
         title = "Countries"
         view.addSubview(tableView)
@@ -66,7 +96,7 @@ class CountriesVC: UIViewController {
     }
     
     //MARK: - Constraints
-    func tableViewConstraints() {
+    private func tableViewConstraints() {
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),

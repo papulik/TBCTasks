@@ -23,6 +23,14 @@ class CountriesCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        contentView.layer.cornerRadius = 20
+        contentView.layer.borderWidth = 1.5
+        contentView.clipsToBounds = true
+        contentView.layer.borderColor = UIColor.borderDarkMode.cgColor
+    }
+    
     //MARK: - Cell Setup
     func setupCell() {
         backgroundColor = .darkMode
