@@ -96,7 +96,6 @@
 				60BB83912BD3EBD000ECCB13 /* Model */,
 				60BB83AE2BD979EE00ECCB13 /* Networking */,
 				60BB83C22BDBBF4C00ECCB13 /* Keychain */,
-				60BB83AB2BD9267300ECCB13 /* ViewModels */,
 				60BB839C2BD4275600ECCB13 /* CustomViews */,
 				60BB838E2BD3EBAB00ECCB13 /* Scenes */,
 				60BB83A12BD5B19600ECCB13 /* TableViewExtensions */,
@@ -120,7 +119,6 @@
 			isa = PBXGroup;
 			children = (
 				60BB838F2BD3EBB400ECCB13 /* Countries */,
-				60BB83C52BDBD5F600ECCB13 /* Avatar */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -128,9 +126,10 @@
 		60BB838F2BD3EBB400ECCB13 /* Countries */ = {
 			isa = PBXGroup;
 			children = (
-				60BB83B12BDAED7400ECCB13 /* LoginVC.swift */,
-				60BB83852BD3DE5A00ECCB13 /* CountriesVC.swift */,
-				60BB83982BD3F83700ECCB13 /* DetailsCountryVC.swift */,
+				60BB83CA2BDE776400ECCB13 /* LoginScreen */,
+				60BB83CB2BDE779300ECCB13 /* CountriesScreen */,
+				60BB83CC2BDE77A600ECCB13 /* DetailScreen */,
+				60BB83CD2BDE77D100ECCB13 /* AvatarSelectScreen */,
 			);
 			path = Countries;
 			sourceTree = "<group>";
@@ -186,17 +185,6 @@
 			path = TableViewExtensions;
 			sourceTree = "<group>";
 		};
-		60BB83AB2BD9267300ECCB13 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				60BB83A92BD90C0600ECCB13 /* CountriesViewModel.swift */,
-				60BB83AC2BD941A200ECCB13 /* CountryDetailsViewModel.swift */,
-				60BB83C62BDBDE1E00ECCB13 /* LoginViewModel.swift */,
-				60BB83C82BDBF5B300ECCB13 /* AvatarViewModel.swift */,
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
 		60BB83AE2BD979EE00ECCB13 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
@@ -233,12 +221,40 @@
 			path = Keychain;
 			sourceTree = "<group>";
 		};
-		60BB83C52BDBD5F600ECCB13 /* Avatar */ = {
+		60BB83CA2BDE776400ECCB13 /* LoginScreen */ = {
+			isa = PBXGroup;
+			children = (
+				60BB83B12BDAED7400ECCB13 /* LoginVC.swift */,
+				60BB83C62BDBDE1E00ECCB13 /* LoginViewModel.swift */,
+			);
+			path = LoginScreen;
+			sourceTree = "<group>";
+		};
+		60BB83CB2BDE779300ECCB13 /* CountriesScreen */ = {
+			isa = PBXGroup;
+			children = (
+				60BB83852BD3DE5A00ECCB13 /* CountriesVC.swift */,
+				60BB83A92BD90C0600ECCB13 /* CountriesViewModel.swift */,
+			);
+			path = CountriesScreen;
+			sourceTree = "<group>";
+		};
+		60BB83CC2BDE77A600ECCB13 /* DetailScreen */ = {
+			isa = PBXGroup;
+			children = (
+				60BB83982BD3F83700ECCB13 /* DetailsCountryVC.swift */,
+				60BB83AC2BD941A200ECCB13 /* CountryDetailsViewModel.swift */,
+			);
+			path = DetailScreen;
+			sourceTree = "<group>";
+		};
+		60BB83CD2BDE77D100ECCB13 /* AvatarSelectScreen */ = {
 			isa = PBXGroup;
 			children = (
 				60BB83C32BDBC91A00ECCB13 /* AvatarVC.swift */,
+				60BB83C82BDBF5B300ECCB13 /* AvatarViewModel.swift */,
 			);
-			path = Avatar;
+			path = AvatarSelectScreen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

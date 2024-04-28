@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Security
 
 class CountriesVC: UIViewController {
     
@@ -17,20 +18,23 @@ class CountriesVC: UIViewController {
     //MARK: - LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.hidesBackButton = true
         firstTimeLogin()
         updateTrait()
         viewModel.delegate = self
         viewModel.fetchCountries()
         setupUI()
         setupSearch()
+        setupLogoutButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.largeTitleTextAttributes = [
-                NSAttributedString.Key.foregroundColor: UIColor.label
-            ]
+            NSAttributedString.Key.foregroundColor: UIColor.label
+        ]
+        navigationController?.navigationBar.tintColor = UIColor.label
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -43,43 +47,7 @@ class CountriesVC: UIViewController {
         navigationItem.backBarButtonItem = backButton
     }
     
-    private func firstTimeLogin() {
-        let isFirstLogin = UserDefaults.standard.bool(forKey: "isFirstLogin")
-        
-        if isFirstLogin {
-            showCongratulatoryAlert()
-            UserDefaults.standard.set(false, forKey: "isFirstLogin")
-        }
-    }
     
-    private func showCongratulatoryAlert() {
-            let alert = UIAlertController(
-                title: "Congratulations 🎉",
-                message: "You have successfully logged in! ✅",
-                preferredStyle: .alert
-            )
-            alert.addAction(UIAlertAction(title: "OK", style: .default))
-            
-            self.present(alert, animated: true)
-        }
-    
-    private func updateTrait() {
-        registerForTraitChanges([UITraitUserInterfaceStyle.self], handler: { (self: Self, previousTraitCollection: UITraitCollection) in
-            if self.traitCollection.userInterfaceStyle == .light {
-                self.tableView.reloadData()
-            } else {
-                self.tableView.reloadData()
-            }
-        })
-    }
-    
-    private func setupSearch() {
-        searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search Countries"
-        navigationItem.searchController = searchController
-        definesPresentationContext = true
-    }
     
     //MARK: - UI Setup
     private func setupUI() {
@@ -105,6 +73,68 @@ class CountriesVC: UIViewController {
         ])
     }
     
+    //MARK: - Setup Search
+    private func setupSearch() {
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Countries"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+    }
+    
+    //MARK: - Setup Logout
+    private func setupLogoutButton() {
+        let logoutButton = UIBarButtonItem(
+            title: "Logout",
+            style: .plain,
+            target: self,
+            action: #selector(logout)
+        )
+        let attributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: UIColor.label
+        ]
+        
+        logoutButton.setTitleTextAttributes(attributes, for: .normal)
+        navigationItem.rightBarButtonItem = logoutButton
+    }
+    
+    //MARK: - Logout Action
+    @objc private func logout() {
+        viewModel.logout()
+    }
+    
+    //MARK: - First Time Login Flag
+    private func firstTimeLogin() {
+        let isFirstLogin = UserDefaults.standard.bool(forKey: "isFirstLogin")
+        
+        if isFirstLogin {
+            showCongratulatoryAlert()
+            UserDefaults.standard.set(false, forKey: "isFirstLogin")
+        }
+    }
+    
+    //MARK: - Alert On FirstTime
+    private func showCongratulatoryAlert() {
+        let alert = UIAlertController(
+            title: "Congratulations 🎉",
+            message: "You have successfully logged in! ✅",
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        
+        self.present(alert, animated: true)
+    }
+    
+    //MARK: - Trait Update
+    private func updateTrait() {
+        registerForTraitChanges([UITraitUserInterfaceStyle.self], handler: { (self: Self, previousTraitCollection: UITraitCollection) in
+            if self.traitCollection.userInterfaceStyle == .light {
+                self.tableView.reloadData()
+            } else {
+                self.tableView.reloadData()
+            }
+        })
+    }
 }
 
 //MARK: - CountriesViewModel Delegate:
@@ -122,8 +152,26 @@ extension CountriesVC: CountriesViewModelDelegate {
         let detailsViewModel = DetailsCountryViewModel(from: country)
         let detailsVC = DetailsCountryVC()
         detailsVC.viewModel = detailsViewModel
-
+        
         navigationController?.pushViewController(detailsVC, animated: false)
+    }
+    
+    func didLogout(success: Bool) {
+        if success {
+            // Handle successful logout (e.g., reset the root view controller)
+            if let windowScene = UIApplication.shared
+                .connectedScenes
+                .first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene,
+               let window = windowScene.windows.first {
+                
+                let loginVC = LoginVC()
+                let navigationController = UINavigationController(rootViewController: loginVC)
+                window.rootViewController = navigationController
+                window.makeKeyAndVisible()
+            }
+        } else {
+            print("Failed to delete Keychain items")
+        }
     }
 }
 

@@ -8,9 +8,12 @@
 import UIKit
 
 class LoginVC: UIViewController {
+    
+    //MARK: - Properties
     let login = LoginView()
     let viewModel = LoginViewModel()
     
+    //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.delegate = self
@@ -20,10 +23,12 @@ class LoginVC: UIViewController {
         setupGalleryButton()
     }
     
+    //MARK: - Setup View
     func setupUI() {
         view = login
     }
     
+    //MARK: - Image Picker UI
     func presentImagePicker() {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
@@ -31,7 +36,8 @@ class LoginVC: UIViewController {
         imagePicker.allowsEditing = false
         present(imagePicker, animated: true, completion: nil)
     }
-
+    
+    //MARK: - Picker Action
     func setupGalleryButton() {
         let action = UIAction { [weak self] _ in
             self?.presentImagePicker()
@@ -39,6 +45,7 @@ class LoginVC: UIViewController {
         login.galleryImage.addAction(action, for: .touchUpInside)
     }
     
+    //MARK: - AvatarSelection << არასავალდებულო.
     func avatarActions() {
         let action = UIAction { [weak self] _ in
             guard let self = self else { return }
@@ -50,6 +57,7 @@ class LoginVC: UIViewController {
         login.avatarImageButton.addAction(action, for: .touchUpInside)
     }
     
+    //MARK: - Login Button Action
     func buttonActions() {
         let action = UIAction { [weak self] _ in
             guard let self = self else { return }
@@ -68,6 +76,7 @@ class LoginVC: UIViewController {
         login.mStack.loginButton.addAction(action, for: .touchUpInside)
     }
     
+    //MARK: - Success Alert
     func showSuccessAlert(_ message: String) {
         let successAlert = UIAlertController(
             title: "სურათი წარმატებით შეინახა",
@@ -80,6 +89,7 @@ class LoginVC: UIViewController {
         }
     }
     
+    //MARK: - Failure Alert
     func showErrorAlert(_ message: String) {
         let errorAlert = UIAlertController(
             title: "Error",
@@ -93,7 +103,7 @@ class LoginVC: UIViewController {
     }
 }
 
-//MARK: - Extensions:
+//MARK: - Extension ViewModel
 extension LoginVC: LoginViewModelDelegate {
     
     func didSaveCredentials(success: Bool) {
@@ -124,12 +134,16 @@ extension LoginVC: LoginViewModelDelegate {
     }
 }
 
+//MARK: - Extension Avatar Image
 extension LoginVC: AvatarVCDelegate {
-    func avatarVCDidSelectImage(selectedImage: UIImage) {
-        login.avatarImageButton.setImage(selectedImage, for: .normal)
+    func avatarVCDidSelectImage(named: String) {
+        if let image = UIImage(named: named) {
+            login.avatarImageButton.setImage(image, for: .normal)
+        }
     }
 }
 
+//MARK: - Extension Image Picker
 extension LoginVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(
         _ picker: UIImagePickerController,
@@ -140,10 +154,15 @@ extension LoginVC: UIImagePickerControllerDelegate, UINavigationControllerDelega
             login.galleryImage.layer.cornerRadius = 65
             login.galleryImage.setImage(selectedImage, for: .normal)
             
-            viewModel.saveImageToDocumentsDirectory(image: selectedImage, with: "gallery_image.png")
+            if let imageData = selectedImage.pngData() {
+                viewModel.saveImageData(imageData, with: "gallery_image.png")
+            } else {
+                showErrorAlert("Failed to convert image to data.")
+            }
         }
         picker.dismiss(animated: true, completion: nil)
     }
+    
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)

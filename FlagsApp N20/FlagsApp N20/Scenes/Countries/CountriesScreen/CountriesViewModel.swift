@@ -4,12 +4,13 @@
 //
 //  Created by Zuka Papuashvili on 24.04.24.
 //
-import UIKit
+import Foundation
 
 protocol CountriesViewModelDelegate: AnyObject {
     func didUpdateCountries()
     func didEncounterError(error: String)
     func selectRow(country: Country)
+    func didLogout(success: Bool)
 }
 
 protocol Searchable {
@@ -18,10 +19,11 @@ protocol Searchable {
 
 class CountriesViewModel {
     weak var delegate: CountriesViewModelDelegate?
-
+    
     private let networking = Networking.shared
     var countries: [Country] = []
-
+    
+    //MARK: - Fetching Logic
     func fetchCountries() {
         networking.fetchData { [weak self] result in
             DispatchQueue.main.async {
@@ -36,18 +38,30 @@ class CountriesViewModel {
         }
     }
     
+    //MARK: - Row Selection Logic
     func selection(index: IndexPath) {
-        delegate?.selectRow(country: countries[index.row])
+        delegate?.selectRow(country: countries[index.section])
+    }
+    
+    //MARK: - Logout Logic
+    func logout() {
+        let deletedUsername = KeychainService.delete(forKey: "username")
+        let deletedPassword = KeychainService.delete(forKey: "password")
+        
+        let success = deletedUsername && deletedPassword
+        delegate?.didLogout(success: success)
     }
 }
 
 extension CountriesViewModel: Searchable {
+    
+    //MARK: - Searching Logic
     func searchCountries(query: String) {
         if query.isEmpty {
             delegate?.didUpdateCountries()
             return
         }
-
+        
         let lowercasedQuery = query.lowercased()
         countries = countries.filter { country in
             if let commonName = country.name?.common?.lowercased() {
@@ -57,5 +71,6 @@ extension CountriesViewModel: Searchable {
         }
         delegate?.didUpdateCountries()
     }
+    
 }
 

@@ -17,12 +17,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: scene)
         if KeychainService.retrieve(forKey: "username") != nil,
            KeychainService.retrieve(forKey: "password") != nil {
-            // Show CountriesVC if username and password are found
             let countriesVC = CountriesVC()
             let navigationController = UINavigationController(rootViewController: countriesVC)
             window?.rootViewController = navigationController
         } else {
-            // Show LoginVC if credentials are not found
             let loginVC = LoginVC()
             let navigationController = UINavigationController(rootViewController: loginVC)
             window?.rootViewController = navigationController
