@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Security
 
 class CountriesVC: UIViewController {
     
@@ -194,5 +193,6 @@ extension CountriesVC: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let searchText = searchController.searchBar.text else { return }
         viewModel.searchCountries(query: searchText)
+        tableView.reloadData()
     }
 }

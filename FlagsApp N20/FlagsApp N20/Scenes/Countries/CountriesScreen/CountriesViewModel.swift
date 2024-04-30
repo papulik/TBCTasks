@@ -21,6 +21,7 @@ class CountriesViewModel {
     weak var delegate: CountriesViewModelDelegate?
     
     private let networking = Networking.shared
+    var allCountries: [Country] = []
     var countries: [Country] = []
     
     //MARK: - Fetching Logic
@@ -29,6 +30,7 @@ class CountriesViewModel {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let fetchedCountries):
+                    self?.allCountries = fetchedCountries
                     self?.countries = fetchedCountries
                     self?.delegate?.didUpdateCountries()
                 case .failure(let error):
@@ -58,6 +60,7 @@ extension CountriesViewModel: Searchable {
     //MARK: - Searching Logic
     func searchCountries(query: String) {
         if query.isEmpty {
+            countries = allCountries
             delegate?.didUpdateCountries()
             return
         }
@@ -71,6 +74,5 @@ extension CountriesViewModel: Searchable {
         }
         delegate?.didUpdateCountries()
     }
-    
 }
 
