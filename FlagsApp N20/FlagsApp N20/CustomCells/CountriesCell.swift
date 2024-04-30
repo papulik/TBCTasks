@@ -23,9 +23,19 @@ class CountriesCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        contentView.layer.cornerRadius = 20
+        contentView.layer.borderWidth = 1.5
+        contentView.clipsToBounds = true
+        contentView.layer.borderColor = UIColor.borderDarkMode.cgColor
+    }
+    
     //MARK: - Cell Setup
     func setupCell() {
+        backgroundColor = .darkMode
         accessoryType = .none
+        selectionStyle = .none
         //subviews
         contentView.addSubview(flagImage)
         contentView.addSubview(countryName)
@@ -39,13 +49,13 @@ class CountriesCell: UITableViewCell {
         //country:
         countryName.textAlignment = .center
         countryName.font = .systemFont(ofSize: 14, weight: .semibold)
-        countryName.textColor = .black
+        countryName.textColor = .label
         //disclosure:
         customDisclosureIndicator.tintColor = .gray
         //Configure contentView
         contentView.layer.cornerRadius = 20
         contentView.layer.borderWidth = 1.5
-        contentView.layer.borderColor = UIColor.gray.cgColor
+        contentView.layer.borderColor = UIColor.borderDarkMode.cgColor
         contentView.clipsToBounds = true
         //Constraints
         cellConstraints()

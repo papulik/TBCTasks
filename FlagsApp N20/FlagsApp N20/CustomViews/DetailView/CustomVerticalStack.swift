@@ -89,7 +89,7 @@ class CustomVerticalStack: UIStackView {
         let labels = [native, spelling, capital, currency, neighbors, nativeName, spellingName, capitalName, currencyName, neighborsName, region, regionName]
         for label in labels {
             label.font = UIFont.systemFont(ofSize: 14)
-            label.textColor = .black
+            label.textColor = .label
         }
         
     }
