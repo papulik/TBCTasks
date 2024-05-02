@@ -21,7 +21,7 @@ class CatFactsTableViewCell: UITableViewCell {
     }
     
     private func setupFactsLabel() {
-        backgroundColor = .systemOrange
+        backgroundColor = .lightGray
         contentView.addSubview(factsLabel)
         factsLabel.numberOfLines = 0
         factsLabel.translatesAutoresizingMaskIntoConstraints = false

@@ -22,16 +22,22 @@ class CatFactsVC: UIViewController {
 
     //MARK: - UI Setup
     func setupTableView() {
-        view.backgroundColor = .lightGray
+        navigationController?.navigationBar.setBackgroundImage(UIImage(ciImage: .gray), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.backgroundColor = .gray
+        title = "Cat Facts"
+        view.backgroundColor = .gray
         view.addSubview(tableView)
-        //delegates:
-        tableView.dataSource = self
-        //cell:
+        //tableView:
         tableView.register(CatFactsTableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableView.automaticDimension
         tableView.layer.cornerRadius = 20
-        tableView.backgroundColor = .systemBackground
+        tableView.backgroundView = UIView()
+        tableView.backgroundView?.backgroundColor = .gray
+        tableView.backgroundColor = .gray
+        //delegates:
+        tableView.dataSource = self
         //constraints:
         tableViewConstraints()
     }
