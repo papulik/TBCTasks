@@ -7,7 +7,11 @@
 
 import UIKit
 
-final class ImageDownloader {
+protocol ImageDownloaderProtocol {
+    func loadImage(from urlString: String, completion: @escaping (UIImage?) -> Void)
+}
+
+final class ImageDownloader: ImageDownloaderProtocol {
     static let shared = ImageDownloader()
     private let cache = NSCache<NSString, UIImage>()
     
