@@ -1,0 +1,29 @@
+//
+//  SceneDelegate.swift
+//  Solid - N24
+//
+//  Created by Zuka Papuashvili on 07.05.24.
+//
+
+import UIKit
+
+class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+
+    var window: UIWindow?
+    
+    
+    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        
+        guard let scene = (scene as? UIWindowScene) else { return }
+        
+        let viewModel = GalleryViewModel()
+        let galleryVC = GalleryVC(viewModel: viewModel)
+        let navigationController = UINavigationController(rootViewController: galleryVC)
+        
+        let window = UIWindow(windowScene: scene)
+        window.rootViewController = navigationController
+        self.window = window
+        window.makeKeyAndVisible()
+    }
+}
+
