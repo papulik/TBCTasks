@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CollectionViewCell: UICollectionViewCell {
+final class CollectionViewCell: UICollectionViewCell {
     
     //MARK: - Cell Identifier
     static let reuseIdentifier = "imageCell"

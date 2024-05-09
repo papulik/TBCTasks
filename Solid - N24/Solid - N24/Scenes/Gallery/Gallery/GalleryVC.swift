@@ -10,7 +10,7 @@ import UIKit
 final class GalleryVC: UIViewController {
     
     //MARK: - DiffableDataSource Sections
-    enum Section {
+    private enum Section {
         case main
     }
     

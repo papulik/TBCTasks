@@ -7,7 +7,7 @@
 
 import Foundation
 
-class FullScreenViewModel {
+final class FullScreenViewModel {
     
     //MARK: - Buisness Logic Variables
     var items: [Item] = []

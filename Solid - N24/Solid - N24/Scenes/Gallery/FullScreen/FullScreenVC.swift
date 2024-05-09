@@ -9,7 +9,7 @@ import UIKit
 final class FullScreenVC: UIViewController {
     
     //MARK: - Diffable Datasource sections
-    enum Section {
+    private enum Section {
         case main
     }
     

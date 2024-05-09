@@ -7,7 +7,7 @@
 
 import Foundation
 
-class GalleryViewModel {
+final class GalleryViewModel {
     
     //MARK: - Callback trigger
     var onUpdate: (() -> Void)?

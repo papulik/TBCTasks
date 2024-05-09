@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FullScreenCell: UICollectionViewCell {
+final class FullScreenCell: UICollectionViewCell {
     
     //MARK: - Cell Identifier
     static let reuseIdentifier = "FullScreenCell"
