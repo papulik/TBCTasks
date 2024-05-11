@@ -59,7 +59,7 @@ final class FullScreenVC: UIViewController {
     private func configureDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section, Item>(collectionView: collectionView) { [weak self] (collectionView, indexPath, item) -> UICollectionViewCell? in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FullScreenCell.reuseIdentifier, for: indexPath) as? FullScreenCell,
-                  let urlString = self?.viewModel.item(at: indexPath)?.photo.urls.thumb else {
+                  let urlString = self?.viewModel.item(at: indexPath)?.photo.urls.regular else {
                 fatalError("Cannot create new cell")
             }
             cell.configure(with: urlString)
@@ -72,10 +72,10 @@ final class FullScreenVC: UIViewController {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
         snapshot.appendSections([.main])
         snapshot.appendItems(viewModel.items)
-        dataSource.apply(snapshot, animatingDifferences: false)
+        dataSource.apply(snapshot, animatingDifferences: true)
         
         if viewModel.initialIndex < viewModel.items.count {
-            collectionView.scrollToItem(at: IndexPath(row: viewModel.initialIndex, section: 0), at: .centeredHorizontally, animated: false)
+            collectionView.scrollToItem(at: IndexPath(row: viewModel.initialIndex, section: 0), at: .centeredHorizontally, animated: true)
         }
     }
 }
