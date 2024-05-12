@@ -20,7 +20,6 @@ final class CartViewModel {
         return selectedProducts.reduce(0.0) { $0 + (Double($1.selectedQuantity ?? 0) * ($1.price ?? 0)) }
     }
 
-    // Dependency Injection
     init(networkManager: NetworkManagerProtocol = NetworkManager.shared) {
         self.networkManager = networkManager
     }
@@ -37,7 +36,6 @@ final class CartViewModel {
                     self?.allProducts = products!
                 case .failure(let error):
                     print("Failed to fetch products: \(error.localizedDescription)")
-                    // Handle the error e.g., updating the user interface
                 }
             }
         }
